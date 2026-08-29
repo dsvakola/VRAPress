@@ -1,0 +1,12 @@
+Options -Indexes
+RewriteEngine On
+
+# Serve existing files/folders directly.
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Clean routes
+RewriteRule ^post/([A-Za-z0-9-]+)/?$ post.php?slug=$1 [L,QSA]
+RewriteRule ^category/([A-Za-z0-9-]+)/?$ category.php?slug=$1 [L,QSA]
+RewriteRule ^([A-Za-z0-9-]+)/?$ page.php?slug=$1 [L,QSA]

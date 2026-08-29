@@ -1,0 +1,11 @@
+# Runtime
+/uploads/*
+!/uploads/.htaccess
+
+# Local config (keep sample committed)
+/config/config.local.php
+/config/installed.lock
+
+# OS
+.DS_Store
+Thumbs.db
