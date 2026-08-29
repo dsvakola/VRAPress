@@ -84,19 +84,21 @@ try {
 
 ?>
 <?php $pageTitle = ($post['meta_title'] ?: $post['title']); require_once __DIR__ . '/includes/public_header.php'; ?>
+<article class="vrp-article">
+    <span class="vrp-kicker">Article</span>
     <h1><?= e($post['title']) ?></h1>
-    <p class="muted">Category:
+    <div class="vrp-meta"><span>Category:
         <?php if (!empty($post['category_slug'])): ?>
             <a href="<?= public_category_url($post['category_slug']) ?>"><?= e($post['category_name']) ?></a>
         <?php else: ?>
             General
         <?php endif; ?>
-        | Published: <?= e(date('d M Y, h:i A', strtotime($post['published_at']))) ?>
-    </p>
+        </span><span>Published: <?= e(date('d M Y, h:i A', strtotime($post['published_at']))) ?></span></div>
     <div class="content-html"><?= $post['content'] ?></div>
 
-    <div class="card" style="margin-top:24px;">
-        <h2 style="margin-top:0;">Comments</h2>
+    <section style="margin-top:42px;">
+        <hr>
+        <h2>Comments</h2>
         <?php if ($commentNotice): ?>
             <div class="flash info"><?= e($commentNotice) ?></div>
         <?php endif; ?>
@@ -104,14 +106,14 @@ try {
         <?php if (!$comments): ?>
             <p class="muted">No comments yet.</p>
         <?php else: ?>
-            <div style="display:flex; flex-direction:column; gap:12px;">
+            <div class="vrp-post-list">
                 <?php foreach ($comments as $c): ?>
-                    <div class="front-card">
+                    <div class="vrp-comment">
                         <div><strong><?= e($c['name']) ?></strong> <span class="muted small">· <?= e(date('d M Y, h:i A', strtotime($c['created_at']))) ?></span></div>
                         <div style="margin-top:6px; white-space:pre-wrap;"><?= e($c['comment_text']) ?></div>
 
                         <?php foreach (($repliesByParent[(int)$c['id']] ?? []) as $r): ?>
-                            <div style="margin-top:10px; padding:10px 12px; border-left:4px solid #c7d2fe; background:#f8fafc; border-radius:10px;">
+                            <div class="vrp-comment-reply">
                                 <div><strong><?= e($r['name']) ?></strong> <span class="muted small">· Reply</span></div>
                                 <div style="margin-top:6px; white-space:pre-wrap;"><?= e($r['comment_text']) ?></div>
                             </div>
@@ -121,7 +123,7 @@ try {
             </div>
         <?php endif; ?>
 
-        <hr style="margin:18px 0; border:0; border-top:1px solid #e5e7eb;">
+        <hr>
         <h3>Leave a comment</h3>
         <form method="post" class="grid-2">
             <input type="hidden" name="csrf_token" value="<?= e(csrf_token()) ?>">
@@ -147,6 +149,6 @@ try {
                 <span class="muted small" style="margin-left:10px;">New comments are shown after approval.</span>
             </div>
         </form>
-    </div>
-</div>
+    </section>
+</article>
 <?php require_once __DIR__ . '/includes/public_footer.php'; ?>

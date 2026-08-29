@@ -10,6 +10,9 @@ if (!$page) {
 }
 ?>
 <?php $pageTitle = ($page['meta_title'] ?: $page['title']); require_once __DIR__ . '/includes/public_header.php'; ?>
-<h1><?= e($page['title']) ?></h1>
-<div class="content-html"><?= $page['content'] ?></div>
+<article class="vrp-article">
+    <span class="vrp-kicker">Page</span>
+    <h1><?= e($page['title']) ?></h1>
+    <div class="content-html"><?= $page['content'] ?></div>
+</article>
 <?php require_once __DIR__ . '/includes/public_footer.php'; ?>
