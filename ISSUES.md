@@ -16,6 +16,12 @@ This register tracks confirmed and suspected product risks until GitHub issues b
 | VRP-010 | Medium | Database | Several relationships lack referential-integrity constraints | Confirmed |
 | VRP-011 | Low | Session | Logout is a GET action without CSRF protection | Confirmed |
 | VRP-012 | High | Quality | No automated functional, security, migration, or browser tests | Confirmed |
+| VRP-013 | Critical | Upgrade security | Legacy upgrade scripts forcibly replace the `admin` password hash | Confirmed |
+| VRP-014 | High | Import integrity | CSV imports lack strict structure/size validation and transactions, allowing errors or partial imports | Confirmed |
+| VRP-015 | Medium | Media lifecycle | Media records and uploaded files have no safe deletion/orphan-management workflow | Confirmed |
+| VRP-016 | High | Error handling | Several caught database/runtime errors are displayed directly to administrators | Confirmed |
+| VRP-017 | Medium | Release integrity | Upgrade filenames/order do not provide a dependable migration sequence | Confirmed |
+| VRP-018 | High | Runtime verification | PHP syntax is verified, but `pdo_mysql`, MariaDB, and database-backed baseline tests are not yet available | Open |
 
 ## Workflow
 
