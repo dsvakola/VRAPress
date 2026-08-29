@@ -7,7 +7,7 @@ This register tracks confirmed and suspected product risks until GitHub issues b
 | VRP-001 | Critical | Authentication | Login page advertises a default credential | Confirmed |
 | VRP-002 | High | Authentication | No login throttling or temporary lockout | Confirmed |
 | VRP-003 | High | Content security | Stored page/post HTML lacks a server-side sanitization policy | Confirmed |
-| VRP-004 | High | Installer | Schema installation is not reliably atomic or resumable | Confirmed |
+| VRP-004 | Critical | Installer | MariaDB installation fails with `There is no active transaction` after leaving a populated partial installation without config/lock files | Runtime confirmed |
 | VRP-005 | High | Configuration | Secure session-cookie and security-header defaults are missing | Confirmed |
 | VRP-006 | Medium | Publishing | Future-dated published posts may be publicly visible immediately | Confirmed |
 | VRP-007 | Medium | Navigation | Custom menu URLs do not restrict unsafe URI schemes | Confirmed |

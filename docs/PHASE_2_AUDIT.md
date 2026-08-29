@@ -21,6 +21,12 @@ The codebase is small and understandable, which is a strong foundation. However,
 
 ## Confirmed critical findings
 
+### A-000 — Installer fails after creating the database
+
+Against an isolated MariaDB 12.3 database, a clean web installation returned `There is no active transaction`. MySQL-family DDL implicitly ended the transaction; the later `commit()` failed. All tables and the submitted administrator record remained in the database, while `config.local.php` and `installed.lock` were not created. The site therefore remains unconfigured and a retry collides with the existing schema.
+
+**Required outcome:** Replace the transaction-dependent schema import with a resumable, version-aware installer; clean up safely on failure; never claim success until database, configuration, lock, and login verification all pass.
+
 ### A-001 — Upgrade scripts reset administrator credentials
 
 `sql/upgrade_v2.sql` and `sql/upgrade_v3.sql` update the `admin` password hash to embedded known hashes. Running an upgrade can silently replace the site owner's password.
@@ -80,15 +86,17 @@ The login view displays a default username and password. The base schema also in
 
 - PHP `8.4.24` was installed from the Windows package catalogue.
 - All 38 PHP files passed `php -l` syntax verification.
-- The installed default module set includes PDO and `mysqlnd` but does not currently load `pdo_mysql`.
-- No MySQL/MariaDB executable or service was found in the checked local environment.
+- `pdo_mysql` was loaded explicitly for the isolated test runtime.
+- MariaDB `12.3.3` was installed without a system-wide service and initialized under the ignored `.runtime` directory.
+- The database binds only to `127.0.0.1:3307` and uses dedicated encrypted local test credentials.
+- A clean installer run reproduced the transaction failure and partial-install state described in A-000.
 
-Therefore, clean installation, database behavior, database-backed HTTP flows, and full browser workflows remain unverified. Static findings and PHP syntax results are evidence-backed; remaining runtime conclusions will be added only after an isolated database environment is configured.
+Database-backed administrator/public workflows and full browser workflows remain unverified because the installer cannot currently complete. Static findings, PHP syntax, database connectivity, and installer failure are evidence-backed.
 
 ## Next audit actions
 
-1. Configure `pdo_mysql` and an isolated MariaDB development database.
-2. Execute clean-install and repeat-install tests.
-3. Seed representative content and exercise every administrator/public workflow.
-4. Convert findings into prioritized GitHub issues with acceptance criteria.
-5. Freeze the Phase 2 report before Phase 3 repairs begin.
+1. Convert findings into prioritized GitHub issues with acceptance criteria.
+2. Freeze the Phase 2 report before Phase 3 repairs begin.
+3. Repair the critical installer on a Phase 3 branch.
+4. Repeat clean-install and failed-install recovery tests.
+5. Seed representative content and exercise every administrator/public workflow.

@@ -1,11 +1,23 @@
-# Runtime
+# Runtime uploads
 /uploads/*
 !/uploads/.htaccess
 
-# Local config (keep sample committed)
+# Local configuration and installation state
 /config/config.local.php
 /config/installed.lock
 
-# OS
+# Isolated local development/test environment
+/.runtime/
+
+# Test and runtime output
+/coverage/
+/logs/
+/cache/
+
+# OS and editor files
 .DS_Store
 Thumbs.db
+*.swp
+*.swo
+.idea/
+.vscode/
