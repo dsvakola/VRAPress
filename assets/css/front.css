@@ -23,3 +23,10 @@ body.vrp-zoom-lock { overflow:hidden; }
 
 /* Images in content */
 .content-html img { max-width:100%; height:auto; }
+.content-html .vrp-lead { font-size:1.22rem; line-height:1.7; color:#334155; font-weight:500; }
+.content-html .vrp-callout { margin:18px 0; padding:14px 17px; border-left:5px solid #3b82f6; border-radius:9px; background:#eff6ff; color:#1e3a5f; }
+.content-html .vrp-callout-tip { border-color:#8b5cf6; background:#f5f3ff; color:#4c1d95; }
+.content-html .vrp-callout-warning { border-color:#f59e0b; background:#fffbeb; color:#78350f; }
+.content-html .vrp-callout-success { border-color:#10b981; background:#ecfdf5; color:#064e3b; }
+.content-html .vrp-blockquote { margin:22px 0; padding:10px 20px; border-left:4px solid #64748b; color:#475569; font-size:1.1rem; font-style:italic; }
+.content-html .vrp-code-block { overflow:auto; margin:18px 0; padding:15px 17px; border-radius:9px; background:#0f172a; color:#e2e8f0; font:14px/1.65 Consolas,Monaco,monospace; white-space:pre-wrap; }

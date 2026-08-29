@@ -51,14 +51,33 @@ textarea { min-height: 220px; resize: vertical; }
 .status-badge { display:inline-block; padding:4px 8px; border-radius:999px; font-size:12px; background:#eef4ff; color:#1f4f8f; }
 .status-badge.draft { background:#f2f4f7; color:#475467; }
 .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; word-break: break-all; }
-.vsa-editor { border:1px solid var(--border); border-radius:12px; overflow:hidden; background:#fff; margin-bottom:14px; position:relative; }
-.vsa-editor-toolbar { display:flex; gap:6px; flex-wrap:wrap; padding:10px; border-bottom:1px solid var(--border); background:#f8fafc; }
+.vsa-editor { border:1px solid var(--border); border-radius:12px; overflow:visible; background:#fff; margin-bottom:14px; position:relative; }
+.vsa-editor-toolbar { display:flex; gap:6px; flex-wrap:wrap; align-items:center; padding:10px; border-bottom:1px solid var(--border); background:#f8fafc; position:sticky; top:0; z-index:30; border-radius:12px 12px 0 0; box-shadow:0 5px 16px rgba(15,23,42,.08); }
 .vsa-editor-toolbar button, .vsa-editor-toolbar label {
     padding:8px 10px; border:1px solid var(--border); border-radius:8px; background:#fff; cursor:pointer; font:inherit; font-size:13px;
 }
+.vsa-editor-toolbar .vsa-style-control { display:flex; align-items:center; gap:7px; cursor:default; padding:4px 5px 4px 9px; font-weight:700; color:#334155; }
+.vsa-editor-style-select { min-width:160px; padding:6px 28px 6px 8px; border:0; border-left:1px solid var(--border); background:#fff; color:#0f172a; font:inherit; cursor:pointer; }
 .vsa-editor-area { min-height:320px; padding:14px; outline:none; line-height:1.6; }
 .vsa-editor-area img { max-width:100%; height:auto; }
 .vsa-editor-area img.is-selected { outline: 3px solid #7aa2f7; outline-offset: 2px; }
+.vsa-editor-area .vrp-lead, .vsa-style-preview.vrp-lead { font-size:1.2rem; line-height:1.65; color:#334155; font-weight:500; }
+.vsa-editor-area .vrp-callout, .vsa-style-preview.vrp-callout { display:block; padding:13px 15px; border-left:5px solid #3b82f6; border-radius:8px; background:#eff6ff; color:#1e3a5f; }
+.vsa-editor-area .vrp-callout-tip, .vsa-style-preview.vrp-callout-tip { border-color:#8b5cf6; background:#f5f3ff; color:#4c1d95; }
+.vsa-editor-area .vrp-callout-warning, .vsa-style-preview.vrp-callout-warning { border-color:#f59e0b; background:#fffbeb; color:#78350f; }
+.vsa-editor-area .vrp-callout-success, .vsa-style-preview.vrp-callout-success { border-color:#10b981; background:#ecfdf5; color:#064e3b; }
+.vsa-editor-area .vrp-blockquote, .vsa-style-preview.vrp-blockquote { display:block; margin:16px 0; padding:8px 18px; border-left:4px solid #64748b; color:#475569; font-size:1.08rem; font-style:italic; }
+.vsa-editor-area .vrp-code-block, .vsa-style-preview.vrp-code-block { display:block; padding:13px 15px; border-radius:8px; background:#0f172a; color:#e2e8f0; font:13px/1.65 Consolas,Monaco,monospace; white-space:pre-wrap; }
+.vsa-style-guide-modal { position:fixed; inset:0; z-index:2100; display:none; align-items:center; justify-content:center; padding:24px; background:rgba(15,23,42,.58); }
+.vsa-style-guide-modal.open { display:flex; }
+.vsa-style-guide-card { width:min(900px,100%); max-height:88vh; overflow:auto; padding:20px; border-radius:16px; background:#fff; box-shadow:0 24px 70px rgba(15,23,42,.28); }
+.vsa-style-guide-head { display:flex; justify-content:space-between; align-items:flex-start; gap:16px; margin-bottom:18px; }
+.vsa-style-guide-head h3, .vsa-style-guide-head p { margin:0 0 5px; }
+.vsa-style-guide-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:12px; }
+.vsa-style-sample { display:block; width:100%; min-height:120px; padding:14px; text-align:left; border:1px solid var(--border); border-radius:12px; background:#fff; cursor:pointer; }
+.vsa-style-sample:hover, .vsa-style-sample:focus { border-color:#2563eb; box-shadow:0 0 0 3px rgba(37,99,235,.12); }
+.vsa-style-sample-name { display:block; margin-bottom:10px; color:#0f172a; font-weight:800; }
+.vsa-style-preview { display:block; }
 .help-text { font-size:12px; color:var(--muted); margin-top:6px; }
 .media-grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap:16px; }
 .media-item { border:1px solid var(--border); border-radius:12px; background:#fff; overflow:hidden; }
