@@ -43,6 +43,8 @@ require_once __DIR__ . '/../../includes/admin_header.php';
         <label>Content</label>
         <div class="js-vsa-editor vsa-editor" data-upload-url="<?= admin_url('/media/upload_ajax.php') ?>" data-library-url="<?= admin_url('/media/list_json.php') ?>" data-csrf="<?= e(csrf_token()) ?>">
             <div class="vsa-editor-toolbar">
+                <label class="vsa-style-control"><span>Styles</span><select class="vsa-editor-style-select" data-style-menu aria-label="Apply content style"><option value="">Choose style…</option><option value="paragraph">Paragraph</option><option value="lead">Lead paragraph</option><option value="note">Note box</option><option value="tip">Tip box</option><option value="warning">Warning box</option><option value="success">Success box</option><option value="quote">Quotation</option><option value="code">Code block</option></select></label>
+                <button type="button" class="js-open-style-guide">Style Guide</button>
                 <button type="button" data-cmd="bold"><strong>B</strong></button>
                 <button type="button" data-cmd="italic"><em>I</em></button>
                 <button type="button" data-cmd="underline"><u>U</u></button>

@@ -10,8 +10,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const csrf = wrapper.dataset.csrf || '';
     const modal = wrapper.querySelector('.vsa-media-modal');
     const modalBody = wrapper.querySelector('.vsa-media-modal-body');
+    const styleMenu = wrapper.querySelector('[data-style-menu]');
     let savedRange = null;
     let selectedImage = null;
+
+    const contentStyles = {
+      paragraph: { label: 'Paragraph', tag: 'p', className: '' },
+      lead: { label: 'Lead paragraph', tag: 'p', className: 'vrp-lead' },
+      note: { label: 'Note box', tag: 'p', className: 'vrp-callout vrp-callout-note' },
+      tip: { label: 'Tip box', tag: 'p', className: 'vrp-callout vrp-callout-tip' },
+      warning: { label: 'Warning box', tag: 'p', className: 'vrp-callout vrp-callout-warning' },
+      success: { label: 'Success box', tag: 'p', className: 'vrp-callout vrp-callout-success' },
+      quote: { label: 'Quotation', tag: 'blockquote', className: 'vrp-blockquote' },
+      code: { label: 'Code block', tag: 'pre', className: 'vrp-code-block' },
+    };
+    const managedStyleClasses = [
+      'vrp-lead', 'vrp-callout', 'vrp-callout-note', 'vrp-callout-tip',
+      'vrp-callout-warning', 'vrp-callout-success', 'vrp-blockquote', 'vrp-code-block',
+    ];
 
     if (!source || !area) return;
     area.innerHTML = source.value || '';
@@ -49,6 +65,15 @@ document.addEventListener('DOMContentLoaded', () => {
         sync();
         saveSelection();
       });
+    });
+
+    styleMenu?.addEventListener('change', () => {
+      if (styleMenu.value) applyContentStyle(styleMenu.value);
+      styleMenu.value = '';
+    });
+
+    wrapper.querySelectorAll('.js-open-style-guide').forEach(btn => {
+      btn.addEventListener('click', openStyleGuide);
     });
 
     wrapper.querySelectorAll('[data-image-size]').forEach(btn => {
@@ -173,6 +198,83 @@ document.addEventListener('DOMContentLoaded', () => {
       alt = String(alt || '').trim();
       if (!alt) alt = defaultAlt || 'Image';
       return alt;
+    }
+
+    function applyContentStyle(styleKey) {
+      const style = contentStyles[styleKey];
+      if (!style) return;
+      restoreSelection();
+      area.focus();
+      document.execCommand('formatBlock', false, style.tag);
+
+      const block = getActiveBlock();
+      if (block) {
+        block.classList.remove(...managedStyleClasses);
+        if (style.className) {
+          block.classList.add(...style.className.split(' '));
+        }
+      }
+      sync();
+      saveSelection();
+    }
+
+    function getActiveBlock() {
+      const selection = window.getSelection();
+      if (!selection || !selection.rangeCount) return null;
+      let node = selection.anchorNode;
+      if (node?.nodeType === Node.TEXT_NODE) node = node.parentElement;
+      const block = node?.closest?.('p, blockquote, pre, h1, h2, h3, h4, div');
+      return block && area.contains(block) ? block : null;
+    }
+
+    function openStyleGuide() {
+      saveSelection();
+      let guide = wrapper.querySelector('.vsa-style-guide-modal');
+      if (!guide) {
+        guide = document.createElement('div');
+        guide.className = 'vsa-style-guide-modal open';
+        guide.innerHTML = `
+          <div class="vsa-style-guide-card" role="dialog" aria-modal="true" aria-label="VRAPress content style guide">
+            <div class="vsa-style-guide-head">
+              <div><h3>VRAPress Style Guide</h3><p>Place the cursor in a paragraph, then choose a style.</p></div>
+              <button type="button" class="btn light js-close-style-guide">Close</button>
+            </div>
+            <div class="vsa-style-guide-grid">
+              ${Object.entries(contentStyles).map(([key, style]) => `
+                <button type="button" class="vsa-style-sample" data-apply-style="${key}">
+                  <span class="vsa-style-sample-name">${escapeHtml(style.label)}</span>
+                  <span class="vsa-style-preview ${escapeAttr(style.className)}">${stylePreviewText(key)}</span>
+                </button>`).join('')}
+            </div>
+          </div>`;
+        wrapper.appendChild(guide);
+        guide.addEventListener('click', (event) => {
+          if (event.target === guide || event.target.closest('.js-close-style-guide')) {
+            guide.classList.remove('open');
+            return;
+          }
+          const applyButton = event.target.closest('[data-apply-style]');
+          if (applyButton) {
+            applyContentStyle(applyButton.dataset.applyStyle);
+            guide.classList.remove('open');
+          }
+        });
+      } else {
+        guide.classList.add('open');
+      }
+    }
+
+    function stylePreviewText(key) {
+      return ({
+        paragraph: 'Standard body paragraph for normal content.',
+        lead: 'A prominent introduction or summary paragraph.',
+        note: 'Note: Useful supporting information for readers.',
+        tip: 'Tip: A practical recommendation or shortcut.',
+        warning: 'Warning: Important caution requiring attention.',
+        success: 'Success: A completed or positive result.',
+        quote: '“A highlighted quotation or testimonial.”',
+        code: 'const vrapress = "clear and dependable";',
+      })[key] || '';
     }
 
     function insertMedia(item, options = {}) {
