@@ -1,0 +1,28 @@
+name: Feature request
+description: Propose a capability aligned with the VRAPress roadmap
+title: "[Feature]: "
+labels: ["enhancement", "triage"]
+body:
+  - type: textarea
+    id: need
+    attributes:
+      label: User need
+      description: Describe the problem or workflow this feature should improve.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+  - type: textarea
+    id: impact
+    attributes:
+      label: Security, data, upgrade, and compatibility impact
+    validations:
+      required: true

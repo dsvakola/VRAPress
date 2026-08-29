@@ -1,0 +1,41 @@
+name: Bug report
+description: Report a reproducible VRAPress defect
+title: "[Bug]: "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: Thank you for helping improve VRAPress. Do not include credentials or private site data.
+  - type: input
+    id: version
+    attributes:
+      label: VRAPress version
+      placeholder: 1.0.0
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Problem
+      description: What happened, and what did you expect?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Reproduction steps
+      placeholder: "1. Open...\n2. Select...\n3. Observe..."
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: PHP, database, web server, browser, and operating system versions.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Sanitized evidence
+      description: Add safe logs or screenshots after removing credentials and personal data.
