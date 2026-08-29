@@ -1,7 +1,10 @@
-  <footer style="margin-top:30px; padding-top:18px; border-top:1px solid #e5e7eb;">
-    <div class="small muted">Powered by <?= e(cms_name()) ?> <?= e(cms_version()) ?></div>
-  </footer>
-</div>
+</main>
+<footer class="vrp-site-footer">
+  <div class="vrp-footer-inner">
+    <span>&copy; <?= e(date('Y')) ?> <?= e(site_title()) ?></span>
+    <span>Powered by <?= e(cms_name()) ?> <?= e(cms_version()) ?></span>
+  </div>
+</footer>
 <script src="<?= site_url('/assets/js/zoom.js') ?>"></script>
 </body>
 </html>

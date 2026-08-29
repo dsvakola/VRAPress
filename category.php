@@ -13,15 +13,20 @@ $postsStmt->execute([(int)$category['id']]);
 $posts = $postsStmt->fetchAll();
 ?>
 <?php $pageTitle = $category['name'] . ' - ' . site_title(); require_once __DIR__ . '/includes/public_header.php'; ?>
-    <h1>Category: <?= e($category['name']) ?></h1>
+    <header class="vrp-archive-header">
+        <span class="vrp-kicker">Article collection</span>
+        <h1><?= e($category['name']) ?></h1>
+    </header>
     <?php if (!$posts): ?>
         <p class="muted">No published posts in this category yet.</p>
     <?php endif; ?>
+    <div class="vrp-post-list">
     <?php foreach ($posts as $post): ?>
-        <div class="front-card" style="margin-bottom:16px;">
-            <h3 style="margin-bottom:6px;"><a href="<?= public_post_url($post['slug']) ?>"><?= e($post['title']) ?></a></h3>
-            <div class="muted small"><?= e(date('d M Y', strtotime($post['published_at']))) ?></div>
+        <article class="vrp-entry-card">
+            <div class="vrp-meta"><span><?= e(date('d M Y', strtotime($post['published_at']))) ?></span></div>
+            <h2><a href="<?= public_post_url($post['slug']) ?>"><?= e($post['title']) ?></a></h2>
             <?php if (!empty($post['excerpt'])): ?><p><?= e($post['excerpt']) ?></p><?php endif; ?>
-        </div>
+        </article>
     <?php endforeach; ?>
+    </div>
 <?php require_once __DIR__ . '/includes/public_footer.php'; ?>

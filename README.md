@@ -4,7 +4,7 @@
 
 VRAPress is an independent, lightweight content management system built with PHP and MySQL. Its goal is to provide a secure, dependable, and approachable foundation for creating and maintaining professional websites directly online.
 
-![Version](https://img.shields.io/badge/version-1.0.1-2563eb)
+![Version](https://img.shields.io/badge/version-1.1.1-2563eb)
 ![PHP](https://img.shields.io/badge/PHP-8.x-777bb4)
 ![Database](https://img.shields.io/badge/database-MySQL%20%7C%20MariaDB-f29111)
 ![License](https://img.shields.io/badge/license-MIT-16a34a)
@@ -25,7 +25,7 @@ VRAPress is being developed as a focused CMS product—not as a WordPress clone.
 
 ## Product direction
 
-The `1.0.1` release continues a structured product-hardening programme covering:
+The `1.1.1` release continues a structured product-hardening programme covering:
 
 1. Architecture, database, installer, routing, and configuration audits
 2. Authentication, authorization, validation, sanitization, and upload security
@@ -54,7 +54,7 @@ Full instructions are available in [docs/INSTALLATION.md](docs/INSTALLATION.md).
 
 ## Project status
 
-Version `1.0.1` improves the writer experience with a sticky editor toolbar and discoverable content styles. A meticulous security, reliability, and product-readiness programme remains underway. Production deployment is not recommended until the documented quality gates are complete.
+Version `1.1.1` introduces the original Aurora design system across the public website and content editor. A meticulous security, reliability, and product-readiness programme remains underway. Production deployment is not recommended until the documented quality gates are complete.
 
 ## Contributing and security
 

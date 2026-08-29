@@ -2,6 +2,16 @@
 
 All notable changes to VRAPress will be documented in this file.
 
+## [1.1.1] — 2026-08-29
+
+### Aurora design system
+
+- Introduced an original Blocksy-inspired visual system without WordPress dependencies.
+- Redesigned the public header, navigation, footer, article, archive, cards, forms, comments, and responsive layouts.
+- Added consistent design tokens for colour, typography, spacing, radii, shadows, and content widths.
+- Matched the page/post editor canvas and Style Guide to the public reading experience.
+- Improved semantic public markup and corrected the post-page wrapper structure.
+
 ## [1.0.1] — 2026-08-29
 
 ### Writer experience

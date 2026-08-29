@@ -11,13 +11,15 @@ $pageTitle = $pageTitle ?? '';
   <link rel="stylesheet" href="<?= site_url('/assets/css/front.css') ?>">
 </head>
 <body>
-<div class="front-wrap">
-  <header class="vrp-header">
+<header class="vrp-site-header">
+  <div class="vrp-header-inner">
     <div class="vrp-brand">
       <a href="<?= site_url('/') ?>"><span class="title"><?= e(site_title()) ?></span></a>
       <div class="tagline"><?= e(site_tagline()) ?></div>
     </div>
-    <nav>
+    <nav class="vrp-nav" aria-label="Primary navigation">
       <?= render_menu_html('primary') ?>
     </nav>
-  </header>
+  </div>
+</header>
+<main class="front-wrap" id="main-content">
